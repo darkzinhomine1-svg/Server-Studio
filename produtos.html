@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produtos & Planos | Server Studio</title>
+    <meta name="description" content="Confira nossos produtos e planos de design, desenvolvimento de sites e bots para servers de Minecraft.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* Estilos adicionais mantendo 100% da identidade visual */
+        .planos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            align-items: stretch;
+        }
+
+        .card-plano {
+            background: var(--bg-card);
+            border: 1px solid var(--borda-glow);
+            border-radius: 16px;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            transition: var(--transicao);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-plano:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255, 56, 56, 0.4);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .card-plano.recomendado {
+            border: 2px solid var(--vermelho-principal);
+            background: linear-gradient(180deg, rgba(255, 56, 56, 0.08) 0%, var(--bg-card) 100%);
+            box-shadow: 0 0 25px var(--vermelho-brilho);
+        }
+
+        .badge-recomendado {
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--vermelho-principal);
+            color: #fff;
+            padding: 4px 16px;
+            border-radius: 20px;
+            font-family: var(--fonte-titulo);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .preco {
+            font-family: var(--fonte-titulo);
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--texto-claro);
+            margin: 15px 0 20px 0;
+        }
+
+        .preco span {
+            font-size: 0.9rem;
+            color: var(--texto-escuro);
+            font-weight: 400;
+        }
+
+        .lista-recursos {
+            list-style: none;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .lista-recursos li {
+            margin-bottom: 12px;
+            color: var(--texto-escuro);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .lista-recursos li i {
+            color: var(--vermelho-principal);
+        }
+
+        .grid-diferenciais {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .card-diferencial {
+            background: var(--bg-secundario);
+            border: 1px solid var(--borda-glow);
+            padding: 30px 20px;
+            border-radius: 12px;
+            text-align: center;
+            transition: var(--transicao);
+        }
+
+        .card-diferencial:hover {
+            border-color: rgba(255, 56, 56, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .card-diferencial i {
+            font-size: 2rem;
+            color: var(--vermelho-principal);
+            margin-bottom: 15px;
+        }
+
+        .card-diferencial h4 {
+            font-family: var(--fonte-titulo);
+            font-size: 1rem;
+            text-transform: uppercase;
+        }
+
+        .btn-full {
+            width: 100%;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="loader" class="loader-container" role="status" aria-live="polite">
+        <div class="spinner"></div>
+    </div>
+
+    <header id="header">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <video src="assets/logo.mp4" autoplay loop muted playsinline class="logo-video" width="40" height="40"></video>
+                SERVER<span>STUDIO</span>
+            </a>
+            <nav>
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="index.html" class="nav-link">Início</a></li>
+                    <li><a href="index.html#servicos" class="nav-link">Serviços</a></li>
+                    <li><a href="produtos.html" class="nav-link" style="color: var(--vermelho-principal);">Produtos & Planos</a></li>
+                    <li><a href="index.html#portfolio" class="nav-link">Portfólio</a></li>
+                    <li><a href="index.html#contato" class="nav-link">Contato</a></li>
+                </ul>
+            </nav>
+            <button class="menu-toggle" id="mobile-menu" aria-label="Abrir menu">
+                <i class="fa-solid fa-bars" id="menu-icon"></i>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-section" style="min-height: 60vh;">
+            <div class="hero-content reveal">
+                <h1>Produtos & <span>Planos</span></h1>
+                <p>Tudo o que você precisa para destacar o seu servidor em um só lugar com o melhor custo-benefício.</p>
+                <a href="#planos" class="btn">
+                    <i class="fa-solid fa-cart-shopping"></i> Ver Planos Mensais
+                </a>
+            </div>
+        </section>
+
+        <section class="reveal">
+            <h2 class="titulo-secao">Nossos <span>Produtos</span></h2>
+            <div class="grid-servicos">
+                <article class="card-servico" style="text-align: left;">
+                    <div class="card-icon"><i class="fa-solid fa-globe"></i></div>
+                    <h3>Desenvolvimento de Sites</h3>
+                    <div class="preco">A partir de R$ 5,00</div>
+                    <ul class="lista-recursos">
+                        <li><i class="fa-solid fa-check"></i> Site moderno e responsivo</li>
+                        <li><i class="fa-solid fa-check"></i> Design personalizado</li>
+                        <li><i class="fa-solid fa-check"></i> Compatível com celular e PC</li>
+                        <li><i class="fa-solid fa-check"></i> Botões para Discord e redes sociais</li>
+                    </ul>
+                    <a href="https://discord.gg/6Zv9CGGdrs" target="_blank" class="btn btn-full">Solicitar</a>
+                </article>
+
+                <article class="card-servico" style="text-align: left;">
+                    <div class="card-icon"><i class="fa-solid fa-image"></i></div>
+                    <h3>Logo + Banner</h3>
+                    <div class="preco">A partir de R$ 3,00</div>
+                    <ul class="lista-recursos">
+                        <li><i class="fa-solid fa-check"></i> Logo personalizada</li>
+                        <li><i class="fa-solid fa-check"></i> Banner para Discord</li>
+                        <li><i class="fa-solid fa-check"></i> Design exclusivo</li>
+                        <li><i class="fa-solid fa-check"></i> Alta qualidade de imagem</li>
+                    </ul>
+                    <a href="https://discord.gg/6Zv9CGGdrs" target="_blank" class="btn btn-full">Solicitar</a>
+                </article>
+            </div>
+        </section>
+
+        <section id="planos" class="reveal">
+            <h2 class="titulo-secao">Planos <span>Mensais</span></h2>
+            <div class="planos-grid">
+                
+                <div class="card-plano">
+                    <div>
+                        <h3>📦 Básico</h3>
+                        <div class="preco">R$ 5,00<span>/mês</span></div>
+                        <ul class="lista-recursos">
+                            <li><i class="fa-solid fa-check"></i> Site básico</li>
+                            <li><i class="fa-solid fa-check"></i> Logo básica</li>
+                            <li><i class="fa-solid fa-check"></i> Banner básico</li>
+                            <li><i class="fa-solid fa-check"></i> Site com anúncios</li>
+                            <li><i class="fa-solid fa-check"></i> Atualizações básicas</li>
+                        </ul>
+                    </div>
+                    <a href="https://discord.gg/6Zv9CGGdrs" target="_blank" class="btn btn-full">Contratar Plano</a>
+                </div>
+
+                <div class="card-plano recomendado">
+                    <span class="badge-recomendado">Mais Recomendado</span>
+                    <div>
+                        <h3>⭐ Plus</h3>
+                        <div class="preco">R$ 10,00<span>/mês</span></div>
+                        <ul class="lista-recursos">
+                            <li><i class="fa-solid fa-check"></i> Site profissional sem anúncios</li>
+                            <li><i class="fa-solid fa-check"></i> Logo personalizada</li>
+                            <li><i class="fa-solid fa-check"></i> Banner personalizado</li>
+                            <li><i class="fa-solid fa-check"></i> Bot básico para Discord</li>
+                            <li><i class="fa-solid fa-check"></i> Atualizações mensais</li>
+                            <li><i class="fa-solid fa-check"></i> Suporte garantido</li>
+                        </ul>
+                    </div>
+                    <a href="https://discord.gg/6Zv9CGGdrs" target="_blank" class="btn btn-full">Contratar Plano</a>
+                </div>
+
+                <div class="card-plano">
+                    <div>
+                        <h3>💎 Plus+</h3>
+                        <div class="preco">R$ 15,00<span>/mês</span></div>
+                        <ul class="lista-recursos">
+                            <li><i class="fa-solid fa-check"></i> Site profissional sem anúncios</li>
+                            <li><i class="fa-solid fa-check"></i> Logo premium</li>
+                            <li><i class="fa-solid fa-check"></i> Banner premium</li>
+                            <li><i class="fa-solid fa-check"></i> Bot avançado para Discord</li>
+                            <li><i class="fa-solid fa-check"></i> Atualizações inclusas</li>
+                            <li><i class="fa-solid fa-check"></i> Suporte prioritário</li>
+                        </ul>
+                    </div>
+                    <a href="https://discord.gg/6Zv9CGGdrs" target="_blank" class="btn btn-full">Contratar Plano</a>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="reveal">
+            <h2 class="titulo-secao">Por que escolher a <span>Server Studio</span>?</h2>
+            <div class="grid-diferenciais">
+                <div class="card-diferencial">
+                    <i class="fa-solid fa-bolt"></i>
+                    <h4>Entrega Rápida</h4>
+                </div>
+                <div class="card-diferencial">
+                    <i class="fa-solid fa-paint-brush"></i>
+                    <h4>Design Exclusivo</h4>
+                </div>
+                <div class="card-diferencial">
+                    <i class="fa-solid fa-mobile-screen"></i>
+                    <h4>Layout Responsivo</h4>
+                </div>
+                <div class="card-diferencial">
+                    <i class="fa-solid fa-headset"></i>
+                    <h4>Suporte de Qualidade</h4>
+                </div>
+            </div>
+        </section>
+
+        <section class="reveal">
+            <div class="contato-wrapper">
+                <h3>Pronto para transformar seu servidor?</h3>
+                <p>Entre em contato e solicite seu orçamento. A Server Studio está pronta para criar um projeto profissional para você.</p>
+                <div class="botoes-contato">
+                    <a href="https://discord.gg/6Zv9CGGdrs" target="_blank" class="btn-contato btn-discord">
+                        <i class="fa-brands fa-discord"></i> Entrar em Contato
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <p>&copy; 2026 <span>Server Studio</span>. Todos os direitos reservados.</p>
+            <p class="footer-disclaimer">Minecraft é marca registrada da Mojang Synergies AB. Não somos afiliados.</p>
+        </div>
+    </footer>
+
+    <button id="back-to-top" aria-label="Voltar para o topo">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <script src="js/script.js" defer></script>
+</body>
+</html>
